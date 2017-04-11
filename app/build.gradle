@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+// Retro lambda
+apply plugin: 'me.tatarka.retrolambda'
+
 // For onclick listeners setting with butter knife
 apply plugin: 'com.neenbedankt.android-apt'
 
@@ -24,6 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+retrolambda {
+    defaultMethods false
+    incremental true
 }
 
 dependencies {
