@@ -6,7 +6,7 @@ package tsekhmeistruk.funnycats;
 
 public class Constants {
 
-    private final String THE_CAT_API = "http://thecatapi.com/";
-    private final String THE_CAT_API_KEY = "MTQ5ODk3";
+    public static final String THE_CAT_API = "http://thecatapi.com/";
+    public static final String THE_CAT_API_KEY = "MTQ5ODk3";
 
 }
