@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="tsekhmeistruk.funnycats.activities.MainActivity"
+    tools:context="tsekhmeistruk.funnycats.activities.CatsActivity"
     tools:showIn="@layout/actionbar_main">
 
 </android.support.constraint.ConstraintLayout>
