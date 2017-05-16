@@ -14,7 +14,7 @@ import tsekhmeistruk.funnycats.R;
  * Created by Roman Tsekhmeistruk on 14.04.2017.
  */
 
-public class CategoryListAdapter extends BaseAdapter{
+public class CategoryListAdapter extends BaseAdapter {
 
     private List<String> categories;
 
