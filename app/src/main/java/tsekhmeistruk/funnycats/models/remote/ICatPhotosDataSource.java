@@ -11,4 +11,6 @@ public interface ICatPhotosDataSource {
 
     Observable<TheCatApiResponse> getCategoryList();
 
+    Observable<TheCatApiResponse> getPhotoList(String category);
+
 }

@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import javax.inject.Inject;
@@ -20,14 +21,18 @@ import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.entities.CategoryList;
+import tsekhmeistruk.funnycats.models.entities.ImageList;
 import tsekhmeistruk.funnycats.presenters.CatPhotosPresenter;
 import tsekhmeistruk.funnycats.views.CatPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
+import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
 
 public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
+    @BindView(R.id.photo_container)
+    GridView photoContainer;
 
     @Inject
     CatPhotosPresenter catPhotosPresenter;
@@ -60,6 +65,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
         catPhotosPresenter.setView(this);
         catPhotosPresenter.loadCategoryList();
+        catPhotosPresenter.loadPhotoList(null);
     }
 
     @Override
@@ -81,6 +87,13 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         CategoryListAdapter categoryListAdapter
                 = new CategoryListAdapter(categoryNameList.getCategories());
         categoryList.setAdapter(categoryListAdapter);
+    }
+
+    @Override
+    public void showPhotoList(ImageList imageList) {
+        PhotoAdapter photoAdapter
+                = new PhotoAdapter(getContext(), imageList.getImageList());
+        photoContainer.setAdapter(photoAdapter);
     }
 
     public AppComponent getAppComponent() {

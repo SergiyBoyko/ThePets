@@ -30,4 +30,15 @@ public class CatPhotosPresenter extends BasePresenter<CatsActivity> {
         );
     }
 
+    public void loadPhotoList(String categoryName) {
+        CatsActivity view = getView();
+        subscribe(catPhotosDataSource.getPhotoList(categoryName)
+                .retryWhen(new RxRetryWithDelay())
+                .map(theCatApiResponse -> theCatApiResponse.getData().getImageList())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
 }
