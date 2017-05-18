@@ -8,6 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -62,6 +64,19 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         categoryList = (ListView) navigationView.findViewById(R.id.category_list);
+        categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    catPhotosPresenter.loadPhotoList(null);
+                } else if (position == 1) {
+                    // TODO: make loading favourites
+                } else {
+                    catPhotosPresenter.loadPhotoList((String) view.getTag());
+                }
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
 
         catPhotosPresenter.setView(this);
         catPhotosPresenter.loadCategoryList();

@@ -47,6 +47,7 @@ public class CategoryListAdapter extends BaseAdapter {
         TextView categoryName = (TextView) convertView.findViewById(R.id.category_name);
         categoryName.setText(categories.get(position));
 
+        convertView.setTag(categories.get(position));
         return convertView;
     }
 
