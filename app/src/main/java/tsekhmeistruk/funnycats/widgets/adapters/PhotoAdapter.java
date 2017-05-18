@@ -32,11 +32,6 @@ public class PhotoAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public PhotoAdapter(Context context, List<Image> images) {
-        this.context = context;
-        this.images = images;
-    }
-
     public void addImages(List<Image> images) {
         this.images.addAll(images);
     }
