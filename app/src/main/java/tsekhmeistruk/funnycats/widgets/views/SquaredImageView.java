@@ -1,4 +1,4 @@
-package tsekhmeistruk.funnycats.widgets;
+package tsekhmeistruk.funnycats.widgets.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

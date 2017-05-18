@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tsekhmeistruk.funnycats.models.entities.Image;
-import tsekhmeistruk.funnycats.widgets.SquaredImageView;
+import tsekhmeistruk.funnycats.widgets.views.SquaredImageView;
 
 /**
  * Created by Roman Tsekhmeistruk on 16.05.2017.
