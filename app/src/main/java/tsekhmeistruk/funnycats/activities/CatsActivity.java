@@ -8,9 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -72,6 +70,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         categoryList = (ListView) navigationView.findViewById(R.id.category_list);
         categoryList.setOnItemClickListener((parent, view, position, id) -> {
             clearPhotoList();
+            photoContainer.setOnScrollListener(new ImagesBarScrollListener());
 
             if (position == 0) {
                 catPhotosPresenter.loadPhotoList(null);
@@ -87,6 +86,8 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         catPhotosPresenter.setView(this);
         catPhotosPresenter.loadCategoryList();
         catPhotosPresenter.loadPhotoList(null);
+
+        photoContainer.setOnScrollListener(new ImagesBarScrollListener());
     }
 
     @Override
@@ -123,6 +124,34 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     private void clearPhotoList() {
         photoAdapter.clearImages();
         photoAdapter.notifyDataSetChanged();
+    }
+
+    private class ImagesBarScrollListener implements AbsListView.OnScrollListener {
+
+        private int visibleThreshold = 0;
+        private int previousTotal = 0;
+        private boolean loading = true;
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem,
+                             int visibleItemCount, int totalItemCount) {
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+            if ((!loading) &&
+                    ((totalItemCount - visibleItemCount) <= (firstVisibleItem - visibleThreshold))) {
+                loading = true;
+                catPhotosPresenter.loadPhotoList(null);
+            }
+        }
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+        }
+
     }
 
 }
