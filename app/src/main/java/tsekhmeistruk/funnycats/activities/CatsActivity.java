@@ -42,6 +42,8 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
     private PhotoAdapter photoAdapter;
 
+    private String categoryName = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,19 +75,20 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             photoContainer.setOnScrollListener(new ImagesBarScrollListener());
 
             if (position == 0) {
-                catPhotosPresenter.loadPhotoList(null);
+                categoryName = null;
             } else if (position == 1) {
                 // TODO: make loading favourites
             } else {
-                catPhotosPresenter.loadPhotoList((String) view.getTag());
+                categoryName = (String) view.getTag();
             }
 
+            catPhotosPresenter.loadPhotoList(categoryName);
             drawer.closeDrawer(GravityCompat.START);
         });
 
         catPhotosPresenter.setView(this);
         catPhotosPresenter.loadCategoryList();
-        catPhotosPresenter.loadPhotoList(null);
+        catPhotosPresenter.loadPhotoList(categoryName);
 
         photoContainer.setOnScrollListener(new ImagesBarScrollListener());
     }
@@ -144,7 +147,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             if ((!loading) &&
                     ((totalItemCount - visibleItemCount) <= (firstVisibleItem - visibleThreshold))) {
                 loading = true;
-                catPhotosPresenter.loadPhotoList(null);
+                catPhotosPresenter.loadPhotoList(categoryName);
             }
         }
 
