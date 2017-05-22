@@ -1,6 +1,7 @@
 package tsekhmeistruk.funnycats.activities;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import javax.inject.Inject;
 
@@ -38,18 +49,27 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     @Inject
     CatPhotosPresenter catPhotosPresenter;
 
+    private LoginButton loginButton;
     private ListView categoryList;
+
+    private CallbackManager callbackManager;
 
     private PhotoAdapter photoAdapter;
 
     private String categoryName = null;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         DaggerPresentersComponent.builder()
                 .appComponent(getAppComponent())
@@ -68,6 +88,10 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
         photoAdapter = new PhotoAdapter(getContext());
         photoContainer.setAdapter(photoAdapter);
+
+        // TODO: make elements initialization with ButterKnife
+        loginButton = (LoginButton) navigationView.findViewById(R.id.login_button);
+        addFacebookLoginButton();
 
         categoryList = (ListView) navigationView.findViewById(R.id.category_list);
         categoryList.setOnItemClickListener((parent, view, position, id) -> {
@@ -127,6 +151,39 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     private void clearPhotoList() {
         photoAdapter.clearImages();
         photoAdapter.notifyDataSetChanged();
+    }
+
+    private void addFacebookLoginButton() {
+//        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("public_profile");
+
+        try {
+            Profile profile = Profile.getCurrentProfile();
+            userId = profile.getId();
+        } catch (NullPointerException ignored) {
+        }
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                AccessToken accessToken = loginResult.getAccessToken();
+                userId = accessToken.getUserId();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        R.string.logging_was_canceled, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        R.string.logging_error, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 
     private class ImagesBarScrollListener implements AbsListView.OnScrollListener {

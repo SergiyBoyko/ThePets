@@ -21,11 +21,19 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_navigation_drawer">
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="175dp" />
+
         <ListView
             android:id="@+id/category_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp" />
+            android:layout_marginTop="205dp" />
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

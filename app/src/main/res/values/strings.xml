@@ -8,5 +8,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="signed_in_as">Signed in as</string>
+    <string name="logging_was_canceled">Logging in was canceled</string>
+    <string name="logging_error">Error while logging. Check your Internet collection</string>
 
 </resources>
