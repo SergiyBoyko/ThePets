@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Funny Cats</string>
 
+    <!-- FaceBook Constants -->
     <string name="facebook_app_id">288470971598411</string>
+    <string name="fb_login_protocol_scheme">fb288470971598411</string>
 
     <!-- Strings -->
     <string name="request_execution_has_failed">Request execution has failed</string>
