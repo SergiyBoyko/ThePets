@@ -172,6 +172,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
             @Override
             public void onCancel() {
+                // TODO: make method for toast showing
                 Toast toast = Toast.makeText(getApplicationContext(),
                         R.string.logging_was_canceled, Toast.LENGTH_SHORT);
                 toast.show();
