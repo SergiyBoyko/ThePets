@@ -1,6 +1,7 @@
 package tsekhmeistruk.funnycats.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -142,6 +143,12 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     public void showPhotoList(ImageList imageList) {
         photoAdapter.addImages(imageList.getImageList());
         photoAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public AppComponent getAppComponent() {
