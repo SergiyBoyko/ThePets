@@ -23,7 +23,7 @@ public interface TheCatApiSet {
 
     @GET("images/favourite?api_key=" + Constants.THE_CAT_API_KEY)
     Observable<TheCatApiResponse> favouriteImage(@Query("sub_id") String userId,
-                                                @Query("image_id") String imageId,
-                                                @Query("action") String action);
+                                                 @Query("image_id") String imageId,
+                                                 @Query("action") String action);
 
 }
