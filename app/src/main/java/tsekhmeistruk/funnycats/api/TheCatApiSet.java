@@ -3,6 +3,7 @@ package tsekhmeistruk.funnycats.api;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
+import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.models.entities.TheCatApiResponse;
 
 /**
@@ -16,5 +17,13 @@ public interface TheCatApiSet {
 
     @GET("images/get?format=xml&results_per_page=50&size=small")
     Observable<TheCatApiResponse> getPhotoList(@Query("category") String categoryName);
+
+    @GET("images/getfavourites?api_key=" + Constants.THE_CAT_API_KEY)
+    Observable<TheCatApiResponse> getFavourites(@Query("sub_id") String userId);
+
+    @GET("api/images/favourite?api_key=" + Constants.THE_CAT_API_KEY)
+    Observable<TheCatApiResponse> favoriteImage(@Query("sub_id") String userId,
+                                                @Query("image_id") String imageId,
+                                                @Query("action") String action);
 
 }
