@@ -35,7 +35,7 @@ import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.entities.CategoryList;
 import tsekhmeistruk.funnycats.models.entities.ImageList;
-import tsekhmeistruk.funnycats.presenters.CatPhotosPresenter;
+import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
 import tsekhmeistruk.funnycats.views.CatPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
@@ -48,7 +48,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     GridView photoContainer;
 
     @Inject
-    CatPhotosPresenter catPhotosPresenter;
+    PhotoListPresenter photoListPresenter;
 
     private LoginButton loginButton;
     private ListView categoryList;
@@ -107,13 +107,13 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
                 categoryName = (String) view.getTag();
             }
 
-            catPhotosPresenter.loadPhotoList(categoryName);
+            photoListPresenter.loadPhotoList(categoryName);
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        catPhotosPresenter.setView(this);
-        catPhotosPresenter.loadCategoryList();
-        catPhotosPresenter.loadPhotoList(categoryName);
+        photoListPresenter.setView(this);
+        photoListPresenter.loadCategoryList();
+        photoListPresenter.loadPhotoList(categoryName);
 
         photoContainer.setOnScrollListener(new ImagesBarScrollListener());
     }
@@ -212,7 +212,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             if ((!loading) &&
                     ((totalItemCount - visibleItemCount) <= (firstVisibleItem - visibleThreshold))) {
                 loading = true;
-                catPhotosPresenter.loadPhotoList(categoryName);
+                photoListPresenter.loadPhotoList(categoryName);
             }
         }
 

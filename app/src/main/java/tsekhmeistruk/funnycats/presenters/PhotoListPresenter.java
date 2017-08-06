@@ -11,11 +11,11 @@ import tsekhmeistruk.funnycats.utils.rx.RxRetryWithDelay;
  * Created by Roman Tsekhmeistruk on 12.05.2017.
  */
 
-public class CatPhotosPresenter extends BasePresenter<CatsActivity> {
+public class PhotoListPresenter extends BasePresenter<CatsActivity> {
 
     private final ICatPhotosDataSource catPhotosDataSource;
 
-    public CatPhotosPresenter(ICatPhotosDataSource catPhotosDataSource) {
+    public PhotoListPresenter(ICatPhotosDataSource catPhotosDataSource) {
         this.catPhotosDataSource = catPhotosDataSource;
     }
 
