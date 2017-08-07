@@ -11,5 +11,7 @@ public class Constants {
 
     public static final String IMAGE = "passed_image";
     public static final String FAVORITE = "favorite";
+    public static final String ACTION_REMOVE = "remove";
+    public static final String USER_ID = "user_id";
 
 }

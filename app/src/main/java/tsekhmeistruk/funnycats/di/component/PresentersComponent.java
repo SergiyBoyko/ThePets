@@ -2,6 +2,7 @@ package tsekhmeistruk.funnycats.di.component;
 
 import dagger.Component;
 import tsekhmeistruk.funnycats.activities.CatsActivity;
+import tsekhmeistruk.funnycats.activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
@@ -18,5 +19,7 @@ import tsekhmeistruk.funnycats.di.scopes.Scopes;
 public interface PresentersComponent {
 
     void inject(CatsActivity catPhotosView);
+
+    void inject(FullSizeImageActivity fullSizeImageActivity);
 
 }

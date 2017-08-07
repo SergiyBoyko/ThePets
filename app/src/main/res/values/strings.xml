@@ -12,5 +12,7 @@
     <string name="signed_in_as">Signed in as</string>
     <string name="logging_was_canceled">Logging in was canceled</string>
     <string name="logging_error">Error while logging. Check your Internet collection</string>
+    <string name="added_favorite">Added to favorites</string>
+    <string name="log_in">Log in with facebook to perform this</string>
 
 </resources>

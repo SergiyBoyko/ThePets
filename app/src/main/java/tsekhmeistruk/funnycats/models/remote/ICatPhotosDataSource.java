@@ -15,4 +15,6 @@ public interface ICatPhotosDataSource {
 
     Observable<TheCatApiResponse> getFavouritesPhotoList(String userId);
 
+    Observable<TheCatApiResponse> favouritePhoto(String userId, String imageId, String action);
+
 }

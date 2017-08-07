@@ -127,6 +127,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     public void startFullSizePhotoActivity(int position) {
         Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
         intent.putExtra(Constants.IMAGE, photoAdapter.getItem(position));
+        intent.putExtra(Constants.USER_ID, userId);
         startActivity(intent);
     }
 

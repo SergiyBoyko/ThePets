@@ -5,6 +5,7 @@ import dagger.Provides;
 import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
 import tsekhmeistruk.funnycats.models.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
 import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
 
 /**
@@ -16,8 +17,14 @@ public class PresentersModule {
 
     @Provides
     @Scope(Scopes.VIEW)
-    public PhotoListPresenter provideCatPhotosPresenter(ICatPhotosDataSource catPhotosDataSource) {
+    public PhotoListPresenter providePhotoListPresenter(ICatPhotosDataSource catPhotosDataSource) {
         return new PhotoListPresenter(catPhotosDataSource);
+    }
+
+    @Provides
+    @Scope(Scopes.VIEW)
+    public FullSizePhotoPresenter provideFullSizeImagePresenter(ICatPhotosDataSource catPhotosDataSource) {
+        return new FullSizePhotoPresenter(catPhotosDataSource);
     }
 
 }

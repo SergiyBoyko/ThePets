@@ -1,7 +1,6 @@
 package tsekhmeistruk.funnycats.presenters;
 
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import tsekhmeistruk.funnycats.activities.CatsActivity;
 import tsekhmeistruk.funnycats.models.remote.ICatPhotosDataSource;
