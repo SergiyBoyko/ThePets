@@ -99,7 +99,6 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         photoAdapter = new PhotoAdapter(getContext());
         photoContainer.setAdapter(photoAdapter);
 
-        // TODO: make elements initialization with ButterKnife
         loginButton = (LoginButton) navigationView.findViewById(R.id.login_button);
         addFacebookLoginButton();
 
@@ -219,17 +218,12 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
             @Override
             public void onCancel() {
-                // TODO: make method for toast showing
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        R.string.logging_was_canceled, Toast.LENGTH_SHORT);
-                toast.show();
+                showToast(getString(R.string.logging_was_canceled));
             }
 
             @Override
             public void onError(FacebookException e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        R.string.logging_error, Toast.LENGTH_SHORT);
-                toast.show();
+                showToast(getString(R.string.logging_error));
             }
         });
     }
