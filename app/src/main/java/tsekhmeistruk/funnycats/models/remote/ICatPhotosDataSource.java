@@ -13,4 +13,6 @@ public interface ICatPhotosDataSource {
 
     Observable<TheCatApiResponse> getPhotoList(String category);
 
+    Observable<TheCatApiResponse> getFavouritesPhotoList(String userId);
+
 }

@@ -1,6 +1,7 @@
 package tsekhmeistruk.funnycats.presenters;
 
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import tsekhmeistruk.funnycats.activities.CatsActivity;
 import tsekhmeistruk.funnycats.models.remote.ICatPhotosDataSource;
@@ -33,6 +34,17 @@ public class PhotoListPresenter extends BasePresenter<CatsActivity> {
     public void loadPhotoList(String categoryName) {
         CatsActivity view = getView();
         subscribe(catPhotosDataSource.getPhotoList(categoryName)
+                .retryWhen(new RxRetryWithDelay())
+                .map(theCatApiResponse -> theCatApiResponse.getData().getImageList())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
+    public void loadFavouritesPhotoList(String userId) {
+        CatsActivity view = getView();
+        subscribe(catPhotosDataSource.getFavouritesPhotoList(userId)
                 .retryWhen(new RxRetryWithDelay())
                 .map(theCatApiResponse -> theCatApiResponse.getData().getImageList())
                 .subscribeOn(Schedulers.io())

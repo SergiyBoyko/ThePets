@@ -26,4 +26,9 @@ public class CatPhotosDataSource implements ICatPhotosDataSource {
         return theCatApiSet.getPhotoList(category);
     }
 
+    @Override
+    public Observable<TheCatApiResponse> getFavouritesPhotoList(String userId) {
+        return theCatApiSet.getFavourites(userId);
+    }
+
 }

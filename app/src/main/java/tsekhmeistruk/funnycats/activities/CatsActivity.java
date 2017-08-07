@@ -102,7 +102,9 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             if (position == 0) {
                 categoryName = null;
             } else if (position == 1) {
-                // TODO: make loading favourites
+                photoListPresenter.loadFavouritesPhotoList(userId);
+                drawer.closeDrawer(GravityCompat.START);
+                return;
             } else {
                 categoryName = (String) view.getTag();
             }
@@ -161,7 +163,6 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     }
 
     private void addFacebookLoginButton() {
-//        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
 
         try {

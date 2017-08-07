@@ -13,7 +13,7 @@ import java.util.List;
 @Root(name = "images")
 public class ImageList {
 
-    @ElementList(name = "images", inline = true)
+    @ElementList(name = "images", inline = true, required = false)
     private List<Image> imageList;
 
     public List<Image> getImageList() {

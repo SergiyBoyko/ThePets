@@ -33,7 +33,9 @@ public class PhotoAdapter extends BaseAdapter {
     }
 
     public void addImages(List<Image> images) {
-        this.images.addAll(images);
+        if (images != null) {
+            this.images.addAll(images);
+        }
     }
 
     public void clearImages() {
