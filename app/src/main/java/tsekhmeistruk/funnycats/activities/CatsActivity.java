@@ -24,8 +24,6 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.io.Serializable;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -108,6 +106,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             } else if (position == 1) {
                 photoListPresenter.loadFavouritesPhotoList(userId);
                 drawer.closeDrawer(GravityCompat.START);
+                categoryName = Constants.FAVORITE;
                 return;
             } else {
                 categoryName = (String) view.getTag();
@@ -127,7 +126,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     @OnItemClick(R.id.photo_container)
     public void startFullSizePhotoActivity(int position) {
         Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
-        intent.putExtra(Constants.IMAGE, (Serializable) photoAdapter.getItem(position));
+        intent.putExtra(Constants.IMAGE, photoAdapter.getItem(position));
         startActivity(intent);
     }
 
@@ -224,7 +223,9 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             if ((!loading) &&
                     ((totalItemCount - visibleItemCount) <= (firstVisibleItem - visibleThreshold))) {
                 loading = true;
-                photoListPresenter.loadPhotoList(categoryName);
+                if (!Constants.FAVORITE.equals(categoryName)) {
+                    photoListPresenter.loadPhotoList(categoryName);
+                }
             }
         }
 

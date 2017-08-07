@@ -10,5 +10,6 @@ public class Constants {
     public static final String THE_CAT_API_KEY = "MTQ5ODk3";
 
     public static final String IMAGE = "passed_image";
+    public static final String FAVORITE = "favorite";
 
 }
