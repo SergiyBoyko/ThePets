@@ -84,6 +84,15 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
         }
     }
 
+    @OnClick(R.id.dislike)
+    public void removeFavorite() {
+        if (userId != null) {
+            fullSizePhotoPresenter.favourite(imageId, userId, Constants.ACTION_REMOVE);
+        } else {
+            showToast(getString(R.string.log_in));
+        }
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
