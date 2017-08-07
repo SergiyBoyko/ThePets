@@ -1,8 +1,11 @@
 package tsekhmeistruk.funnycats.activities;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -62,6 +66,8 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     private String categoryName = null;
     private String userId;
     private boolean isFavorite = false;
+
+    private NetworkChangeReceiver networkChangeReceiver = new NetworkChangeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +133,19 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         photoContainer.setOnScrollListener(new ImagesBarScrollListener());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(networkChangeReceiver);
+    }
+
     @OnItemClick(R.id.photo_container)
     public void startFullSizePhotoActivity(int position) {
         Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
@@ -176,6 +195,10 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     private void clearPhotoList() {
         photoAdapter.clearImages();
         photoAdapter.notifyDataSetChanged();
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     private void addFacebookLoginButton() {
@@ -237,6 +260,38 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
+        }
+
+    }
+
+    private class NetworkChangeReceiver extends BroadcastReceiver {
+
+        public NetworkChangeReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!isInitialStickyBroadcast()) {
+                final ConnectivityManager connMgr = (ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                final android.net.NetworkInfo wifi = connMgr
+                        .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+                final android.net.NetworkInfo mobile = connMgr
+                        .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+                if (wifi.isConnected() || mobile.isConnected()) {
+                    photoListPresenter.loadCategoryList();
+                    if (Constants.FAVORITE.equals(categoryName)) {
+                        photoListPresenter.loadFavouritesPhotoList(userId);
+                    } else {
+                        photoListPresenter.loadPhotoList(categoryName);
+                    }
+                } else {
+                    showToast(getString(R.string.disconnected));
+                }
+            }
         }
 
     }
