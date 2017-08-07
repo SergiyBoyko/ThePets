@@ -36,12 +36,12 @@
             android:layout_height="45dp"
             android:src="@drawable/unfavorite" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/download"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginLeft="55dp"
-            android:src="@drawable/download" />
+            android:src="@drawable/download" />-->
 
         <ImageView
             android:id="@+id/like"
