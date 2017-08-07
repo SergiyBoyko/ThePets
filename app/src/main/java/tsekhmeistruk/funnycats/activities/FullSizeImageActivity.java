@@ -75,6 +75,12 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
         showToast(getString(R.string.added_favorite));
     }
 
+    @Override
+    public void onRemovingFromFavorites() {
+        showToast(getString(R.string.removed_favorite));
+        onBackPressed();
+    }
+
     @OnClick(R.id.like)
     public void addFavorite() {
         if (userId != null) {

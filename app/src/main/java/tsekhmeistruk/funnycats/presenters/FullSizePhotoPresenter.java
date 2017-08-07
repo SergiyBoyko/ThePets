@@ -30,7 +30,7 @@ public class FullSizePhotoPresenter extends BasePresenter<FullSizeImageActivity>
                     if (!Constants.ACTION_REMOVE.equals(action)) {
                         view.onAddingToFavorites();
                     } else {
-                        // TODO: implement logic when removed from favorites
+                        view.onRemovingFromFavorites();
                     }
                 }, new RxErrorAction(view.getContext()))
         );

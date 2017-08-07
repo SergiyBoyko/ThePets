@@ -8,4 +8,6 @@ public interface FullSizePhotoView extends BaseView {
 
     void onAddingToFavorites();
 
+    void onRemovingFromFavorites();
+
 }
