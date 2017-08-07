@@ -61,6 +61,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
     private String categoryName = null;
     private String userId;
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +104,16 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
             if (position == 0) {
                 categoryName = null;
+                isFavorite = false;
             } else if (position == 1) {
                 photoListPresenter.loadFavouritesPhotoList(userId);
                 drawer.closeDrawer(GravityCompat.START);
                 categoryName = Constants.FAVORITE;
+                isFavorite = true;
                 return;
             } else {
                 categoryName = (String) view.getTag();
+                isFavorite = false;
             }
 
             photoListPresenter.loadPhotoList(categoryName);
@@ -128,6 +132,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
         intent.putExtra(Constants.IMAGE, photoAdapter.getItem(position));
         intent.putExtra(Constants.USER_ID, userId);
+        intent.putExtra(Constants.IS_FAVORITE, isFavorite);
         startActivity(intent);
     }
 

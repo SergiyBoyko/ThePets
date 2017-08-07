@@ -41,6 +41,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     private String userId;
     private String imageId;
+    private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
             imageId = image.getId();
         }
         userId = getIntent().getExtras().getString(Constants.USER_ID);
+        isFavorite = getIntent().getExtras().getBoolean(Constants.IS_FAVORITE);
 
         fullSizePhotoPresenter.setView(this);
     }
@@ -77,8 +79,12 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     @Override
     public void onRemovingFromFavorites() {
-        showToast(getString(R.string.removed_favorite));
-        onBackPressed();
+        if (isFavorite) {
+            showToast(getString(R.string.removed_favorite));
+            onBackPressed();
+        } else {
+            showToast(getString(R.string.is_not_favorite));
+        }
     }
 
     @OnClick(R.id.like)
