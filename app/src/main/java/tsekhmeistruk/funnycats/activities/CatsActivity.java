@@ -24,11 +24,15 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import tsekhmeistruk.funnycats.AppFunnyCats;
+import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
@@ -118,6 +122,13 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         photoListPresenter.loadPhotoList(categoryName);
 
         photoContainer.setOnScrollListener(new ImagesBarScrollListener());
+    }
+
+    @OnItemClick(R.id.photo_container)
+    public void startFullSizePhotoActivity(int position) {
+        Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
+        intent.putExtra(Constants.IMAGE, (Serializable) photoAdapter.getItem(position));
+        startActivity(intent);
     }
 
     @Override

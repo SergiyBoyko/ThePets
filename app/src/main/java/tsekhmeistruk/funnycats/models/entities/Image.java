@@ -3,12 +3,14 @@ package tsekhmeistruk.funnycats.models.entities;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /**
  * Created by Roman Tsekhmeistruk on 17.01.2017.
  */
 
 @Root(name = "image")
-public class Image {
+public class Image implements Serializable {
 
     @Element(name = "url")
     private String url;
