@@ -71,7 +71,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
     }
 
     @Override
-    public void onAddToFavorites() {
+    public void onAddingToFavorites() {
         showToast(getString(R.string.added_favorite));
     }
 

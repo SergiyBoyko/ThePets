@@ -6,6 +6,6 @@ package tsekhmeistruk.funnycats.views;
 
 public interface FullSizePhotoView extends BaseView {
 
-    void onAddToFavorites();
+    void onAddingToFavorites();
 
 }

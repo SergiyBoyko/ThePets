@@ -28,7 +28,7 @@ public class FullSizePhotoPresenter extends BasePresenter<FullSizeImageActivity>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(t -> {
                     if (!Constants.ACTION_REMOVE.equals(action)) {
-                        view.onAddToFavorites();
+                        view.onAddingToFavorites();
                     } else {
                         // TODO: implement logic when removed from favorites
                     }
