@@ -31,23 +31,22 @@
 
         <ImageView
             android:id="@+id/dislike"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:rotation="180"
-            android:src="@drawable/like" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/unfavorite" />
 
         <ImageView
             android:id="@+id/download"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="55dp"
             android:src="@drawable/download" />
 
         <ImageView
             android:id="@+id/like"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="55dp"
-            android:src="@drawable/like" />
+            android:src="@drawable/favorite" />
     </LinearLayout>
 </RelativeLayout>
