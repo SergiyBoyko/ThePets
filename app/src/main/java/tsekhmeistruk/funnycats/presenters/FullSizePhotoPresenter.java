@@ -22,7 +22,7 @@ public class FullSizePhotoPresenter extends BasePresenter<FullSizeImageActivity>
 
     public void favourite(String imageId, String userId, String action) {
         FullSizeImageActivity view = getView();
-        subscribe(catPhotosDataSource.favouritePhoto(imageId, userId, action)
+        subscribe(catPhotosDataSource.favouritePhoto(userId, imageId, action)
                 .retryWhen(new RxRetryWithDelay())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
