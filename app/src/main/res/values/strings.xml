@@ -6,7 +6,7 @@
     <string name="fb_login_protocol_scheme">fb288470971598411</string>
 
     <!-- Strings -->
-    <string name="request_execution_has_failed">Request execution has failed</string>
+    <string name="request_execution_has_failed">Request execution has failed. Check your internet connection</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="signed_in_as">Signed in as</string>
