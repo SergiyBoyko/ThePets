@@ -41,6 +41,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     private String userId;
     private String imageId;
+    private String imageUrl;
     private boolean isFavorite;
 
     @Override
@@ -58,8 +59,9 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
         Image image = (Image) getIntent().getExtras().getSerializable(Constants.IMAGE);
         if (image != null) {
-            showImage(image.getUrl());
+            imageUrl = image.getUrl();
             imageId = image.getId();
+            showImage();
         }
         userId = getIntent().getExtras().getString(Constants.USER_ID);
         isFavorite = getIntent().getExtras().getBoolean(Constants.IS_FAVORITE);
@@ -109,7 +111,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-    private void showImage(String imageUrl) {
+    private void showImage() {
         if ((imageUrl != null) && (!TextUtils.isEmpty(imageUrl))) {
             Glide.with(this.getApplicationContext())
                     .load(imageUrl)
