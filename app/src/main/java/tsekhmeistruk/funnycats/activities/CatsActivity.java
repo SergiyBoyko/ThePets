@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -67,6 +68,8 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     private String userId;
     private boolean isFavorite = false;
 
+    private NavigationView navigationView;
+
     private NetworkChangeReceiver networkChangeReceiver = new NetworkChangeReceiver();
 
     @Override
@@ -94,7 +97,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         photoAdapter = new PhotoAdapter(getContext());
         photoContainer.setAdapter(photoAdapter);
@@ -130,6 +133,8 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         photoListPresenter.loadPhotoList(categoryName);
 
         photoContainer.setOnScrollListener(new ImagesBarScrollListener());
+
+        showUserName();
     }
 
     @Override
@@ -196,6 +201,26 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         photoAdapter.notifyDataSetChanged();
     }
 
+    private void showUserName() {
+        View header = navigationView.getHeaderView(0);
+        TextView userName = (TextView) header.findViewById(R.id.user_name);
+        TextView logIn = (TextView) header.findViewById(R.id.log_in);
+        TextView loggedIs = (TextView) header.findViewById(R.id.logged_in_as);
+
+        Profile profile = Profile.getCurrentProfile();
+
+        if (profile != null) {
+            logIn.setVisibility(View.GONE);
+            loggedIs.setVisibility(View.VISIBLE);
+            userName.setVisibility(View.VISIBLE);
+            userName.setText(profile.getName());
+        } else {
+            logIn.setVisibility(View.VISIBLE);
+            loggedIs.setVisibility(View.GONE);
+            userName.setVisibility(View.GONE);
+        }
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
@@ -214,15 +239,18 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
             public void onSuccess(LoginResult loginResult) {
                 AccessToken accessToken = loginResult.getAccessToken();
                 userId = accessToken.getUserId();
+                showUserName();
             }
 
             @Override
             public void onCancel() {
+                showUserName();
                 showToast(getString(R.string.logging_was_canceled));
             }
 
             @Override
             public void onError(FacebookException e) {
+                showUserName();
                 showToast(getString(R.string.logging_error));
             }
         });
