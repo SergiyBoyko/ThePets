@@ -81,18 +81,18 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     @Override
     public void onRemovingFromFavorites() {
-        if (isFavorite) {
-            showToast(getString(R.string.removed_favorite));
-            onBackPressed();
-        } else {
-            showToast(getString(R.string.is_not_favorite));
-        }
+        showToast(getString(R.string.removed_favorite));
+        onBackPressed();
     }
 
     @OnClick(R.id.like)
     public void addFavorite() {
         if (userId != null) {
-            fullSizePhotoPresenter.favourite(imageId, userId, null);
+            if (!isFavorite) {
+                fullSizePhotoPresenter.favourite(imageId, userId, null);
+            } else {
+                showToast(getString(R.string.already_favorited));
+            }
         } else {
             showToast(getString(R.string.log_in));
         }
@@ -101,7 +101,11 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
     @OnClick(R.id.dislike)
     public void removeFavorite() {
         if (userId != null) {
-            fullSizePhotoPresenter.favourite(imageId, userId, Constants.ACTION_REMOVE);
+            if (isFavorite) {
+                fullSizePhotoPresenter.favourite(imageId, userId, Constants.ACTION_REMOVE);
+            } else {
+                showToast(getString(R.string.is_not_favorite));
+            }
         } else {
             showToast(getString(R.string.log_in));
         }

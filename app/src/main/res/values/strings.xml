@@ -17,5 +17,6 @@
     <string name="is_not_favorite">This image is not your favorite</string>
     <string name="disconnected">Problems with internet connection occurred!</string>
     <string name="log_in">Log in with facebook to perform this</string>
+    <string name="already_favorited">Already favorited.</string>
 
 </resources>
