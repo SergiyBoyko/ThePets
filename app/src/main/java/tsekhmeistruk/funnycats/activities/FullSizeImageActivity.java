@@ -126,6 +126,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
                                                    Target<GlideDrawable> target,
                                                    boolean isFirstResource) {
                             progressBar.setVisibility(View.GONE);
+                            showToast(getString(R.string.request_execution_has_failed));
                             return false;
                         }
 

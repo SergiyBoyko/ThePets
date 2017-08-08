@@ -88,6 +88,11 @@ public class PhotoAdapter extends BaseAdapter {
                                                boolean isFirstResource) {
                         progressBar.setVisibility(View.GONE);
                         imageView.setVisibility(View.INVISIBLE);
+                        try {
+                            images.remove(position);
+                            notifyDataSetChanged();
+                        } catch (IndexOutOfBoundsException ignored) {
+                        }
                         return false;
                     }
 

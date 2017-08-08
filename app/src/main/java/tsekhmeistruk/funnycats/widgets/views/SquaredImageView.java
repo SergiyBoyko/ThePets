@@ -22,6 +22,7 @@ public class SquaredImageView extends android.support.v7.widget.AppCompatImageVi
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
+        setAdjustViewBounds(true);
     }
 
 }
