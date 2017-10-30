@@ -9,12 +9,6 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'key0'
-            keyPassword 'keypassword123'
-            storeFile file('D:/Projects/Android/MyProjects/forGP/funny_cats_key_store.jks')
-            storePassword 'pass123'
-        }
     }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -30,11 +24,6 @@ android {
         multiDexEnabled true
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

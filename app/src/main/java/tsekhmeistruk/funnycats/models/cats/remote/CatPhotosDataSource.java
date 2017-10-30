@@ -1,8 +1,8 @@
-package tsekhmeistruk.funnycats.models.remote;
+package tsekhmeistruk.funnycats.models.cats.remote;
 
 import rx.Observable;
 import tsekhmeistruk.funnycats.api.TheCatApiSet;
-import tsekhmeistruk.funnycats.models.entities.TheCatApiResponse;
+import tsekhmeistruk.funnycats.models.cats.entities.TheCatApiResponse;
 
 /**
  * Created by Roman Tsekhmeistruk on 12.05.2017.

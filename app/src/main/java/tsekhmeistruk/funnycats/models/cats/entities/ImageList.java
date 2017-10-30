@@ -1,4 +1,4 @@
-package tsekhmeistruk.funnycats.models.entities;
+package tsekhmeistruk.funnycats.models.cats.entities;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;

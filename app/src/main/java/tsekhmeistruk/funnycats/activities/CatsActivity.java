@@ -40,10 +40,10 @@ import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
-import tsekhmeistruk.funnycats.models.entities.CategoryList;
-import tsekhmeistruk.funnycats.models.entities.ImageList;
+import tsekhmeistruk.funnycats.models.cats.entities.CategoryList;
+import tsekhmeistruk.funnycats.models.cats.entities.ImageList;
 import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
-import tsekhmeistruk.funnycats.views.CatPhotosView;
+import tsekhmeistruk.funnycats.views.cats_views.CatPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
 

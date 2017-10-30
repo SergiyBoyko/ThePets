@@ -15,7 +15,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
-import tsekhmeistruk.funnycats.models.entities.Image;
+import tsekhmeistruk.funnycats.models.cats.entities.Image;
 import tsekhmeistruk.funnycats.widgets.views.SquaredImageView;
 
 /**

@@ -4,7 +4,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 import tsekhmeistruk.funnycats.Constants;
-import tsekhmeistruk.funnycats.models.entities.TheCatApiResponse;
+import tsekhmeistruk.funnycats.models.cats.entities.TheCatApiResponse;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.

@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
-import tsekhmeistruk.funnycats.models.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
 import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
 import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
 

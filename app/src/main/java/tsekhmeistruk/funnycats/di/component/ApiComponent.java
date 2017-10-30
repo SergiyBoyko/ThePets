@@ -1,7 +1,7 @@
 package tsekhmeistruk.funnycats.di.component;
 
 import retrofit2.Retrofit;
-import tsekhmeistruk.funnycats.models.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.

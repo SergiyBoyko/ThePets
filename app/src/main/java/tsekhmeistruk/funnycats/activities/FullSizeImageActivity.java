@@ -25,9 +25,9 @@ import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
-import tsekhmeistruk.funnycats.models.entities.Image;
+import tsekhmeistruk.funnycats.models.cats.entities.Image;
 import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
-import tsekhmeistruk.funnycats.views.FullSizePhotoView;
+import tsekhmeistruk.funnycats.views.cats_views.FullSizePhotoView;
 
 public class FullSizeImageActivity extends AppCompatActivity implements FullSizePhotoView {
 
