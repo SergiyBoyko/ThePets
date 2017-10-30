@@ -1,10 +1,11 @@
-package tsekhmeistruk.funnycats.presenters;
+package tsekhmeistruk.funnycats.presenters.cats_presenter;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tsekhmeistruk.funnycats.Constants;
-import tsekhmeistruk.funnycats.activities.FullSizeImageActivity;
+import tsekhmeistruk.funnycats.activities.cats_activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.presenters.BasePresenter;
 import tsekhmeistruk.funnycats.utils.rx.RxErrorAction;
 import tsekhmeistruk.funnycats.utils.rx.RxRetryWithDelay;
 

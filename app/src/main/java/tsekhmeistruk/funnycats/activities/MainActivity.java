@@ -37,17 +37,18 @@ import butterknife.OnItemClick;
 import tsekhmeistruk.funnycats.AppFunnyCats;
 import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
+import tsekhmeistruk.funnycats.activities.cats_activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.cats.entities.CategoryList;
 import tsekhmeistruk.funnycats.models.cats.entities.ImageList;
-import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
+import tsekhmeistruk.funnycats.presenters.cats_presenter.PhotoListPresenter;
 import tsekhmeistruk.funnycats.views.cats_views.CatPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
 
-public class CatsActivity extends AppCompatActivity implements CatPhotosView {
+public class MainActivity extends AppCompatActivity implements CatPhotosView {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -152,7 +153,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
 
     @OnItemClick(R.id.photo_container)
     public void startFullSizePhotoActivity(int position) {
-        Intent intent = new Intent(CatsActivity.this, FullSizeImageActivity.class);
+        Intent intent = new Intent(MainActivity.this, FullSizeImageActivity.class);
         intent.putExtra(Constants.IMAGE, photoAdapter.getItem(position));
         intent.putExtra(Constants.USER_ID, userId);
         intent.putExtra(Constants.IS_FAVORITE, isFavorite);

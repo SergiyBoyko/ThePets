@@ -5,8 +5,8 @@ import dagger.Provides;
 import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
-import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
-import tsekhmeistruk.funnycats.presenters.PhotoListPresenter;
+import tsekhmeistruk.funnycats.presenters.cats_presenter.FullSizePhotoPresenter;
+import tsekhmeistruk.funnycats.presenters.cats_presenter.PhotoListPresenter;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.
