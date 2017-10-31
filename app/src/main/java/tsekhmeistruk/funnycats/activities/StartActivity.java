@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 
 import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.activities.cats_activities.CatsActivity;
+import tsekhmeistruk.funnycats.activities.dog_activities.DogsActivity;
 import tsekhmeistruk.funnycats.models.cats.entities.Image;
 
 public class StartActivity extends AppCompatActivity {
@@ -26,8 +27,6 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void onDogButtonPressed(View view) {
-        Toast.makeText(this, "dog pressed", Toast.LENGTH_SHORT).show();
-
-        // TODO: 31.10.2017 implement and invoke
+        startActivity(new Intent(StartActivity.this, DogsActivity.class));
     }
 }

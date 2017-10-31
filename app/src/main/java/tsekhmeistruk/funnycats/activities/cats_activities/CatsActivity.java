@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.GridView;
@@ -80,6 +81,11 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        ((NavigationView) findViewById(R.id.nav_view))
+                .addHeaderView(LayoutInflater.from(this)
+                        .inflate(R.layout.header_navigation_drawer_cats, null));
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();

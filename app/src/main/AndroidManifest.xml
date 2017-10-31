@@ -21,13 +21,15 @@
             android:name=".activities.cats_activities.CatsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
         <activity
             android:name=".activities.cats_activities.FullSizeImageActivity"
             android:theme="@style/AppFullScreenTheme" />
 
-        <activity android:name=".activities.StartActivity"
+        <activity
+            android:name=".activities.StartActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -35,6 +37,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.dog_activities.DogsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
     </application>
 
