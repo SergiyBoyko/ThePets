@@ -13,12 +13,12 @@
         android:id="@+id/main_header"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="75dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/pussyblack"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:src="@drawable/pussyblack" />
 
     <ImageView
         android:id="@+id/animated_bg"
@@ -31,8 +31,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#331144aa"
-        />
+        android:background="#331144aa" />
 
     <ImageView
         android:id="@+id/header_text"
@@ -44,26 +43,26 @@
     <Button
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:drawableTop="@drawable/cat48_icon"
-        android:paddingTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="15dp"
-        android:text="@string/cats"
-        android:background="@drawable/main_button">
-    </Button>
+        android:background="@drawable/main_button"
+        android:drawableTop="@drawable/cat48_icon"
+        android:onClick="onCatButtonPressed"
+        android:paddingTop="10dp"
+        android:text="@string/cats"/>
 
     <Button
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:drawableTop="@drawable/dog48_icon"
-        android:paddingTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="15dp"
-        android:text="@string/dogs"
-        android:background="@drawable/main_button">
-    </Button>
+        android:background="@drawable/main_button"
+        android:drawableTop="@drawable/dog48_icon"
+        android:onClick="onDogButtonPressed"
+        android:paddingTop="10dp"
+        android:text="@string/dogs"/>
 
 </RelativeLayout>
