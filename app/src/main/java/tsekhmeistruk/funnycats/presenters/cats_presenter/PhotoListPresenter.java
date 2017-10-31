@@ -2,7 +2,7 @@ package tsekhmeistruk.funnycats.presenters.cats_presenter;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import tsekhmeistruk.funnycats.activities.MainActivity;
+import tsekhmeistruk.funnycats.activities.cats_activities.CatsActivity;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
 import tsekhmeistruk.funnycats.presenters.BasePresenter;
 import tsekhmeistruk.funnycats.utils.rx.RxErrorAction;
@@ -12,7 +12,7 @@ import tsekhmeistruk.funnycats.utils.rx.RxRetryWithDelay;
  * Created by Roman Tsekhmeistruk on 12.05.2017.
  */
 
-public class PhotoListPresenter extends BasePresenter<MainActivity> {
+public class PhotoListPresenter extends BasePresenter<CatsActivity> {
 
     private final ICatPhotosDataSource catPhotosDataSource;
 
@@ -21,7 +21,7 @@ public class PhotoListPresenter extends BasePresenter<MainActivity> {
     }
 
     public void loadCategoryList() {
-        MainActivity view = getView();
+        CatsActivity view = getView();
         subscribe(catPhotosDataSource.getCategoryList()
                 .retryWhen(new RxRetryWithDelay())
                 .map(theCatApiResponse -> theCatApiResponse.getData().getCategoryList())
@@ -32,7 +32,7 @@ public class PhotoListPresenter extends BasePresenter<MainActivity> {
     }
 
     public void loadPhotoList(String categoryName) {
-        MainActivity view = getView();
+        CatsActivity view = getView();
         subscribe(catPhotosDataSource.getPhotoList(categoryName)
                 .retryWhen(new RxRetryWithDelay())
                 .map(theCatApiResponse -> theCatApiResponse.getData().getImageList())
@@ -43,7 +43,7 @@ public class PhotoListPresenter extends BasePresenter<MainActivity> {
     }
 
     public void loadFavouritesPhotoList(String userId) {
-        MainActivity view = getView();
+        CatsActivity view = getView();
         subscribe(catPhotosDataSource.getFavouritesPhotoList(userId)
                 .retryWhen(new RxRetryWithDelay())
                 .map(theCatApiResponse -> theCatApiResponse.getData().getImageList())

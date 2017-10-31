@@ -19,5 +19,7 @@
     <string name="disconnected">Problems with internet connection occurred!</string>
     <string name="log_in">Log in with facebook to perform this</string>
     <string name="already_favorited">Already favorited.</string>
+    <string name="dogs">Dogs</string>
+    <string name="cats">Cats</string>
 
 </resources>
