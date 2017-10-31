@@ -15,6 +15,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import tsekhmeistruk.funnycats.models.PictureEntity;
 import tsekhmeistruk.funnycats.models.cats.entities.Image;
 import tsekhmeistruk.funnycats.widgets.views.SquaredImageView;
 
@@ -25,7 +26,8 @@ import tsekhmeistruk.funnycats.widgets.views.SquaredImageView;
 public class PhotoAdapter extends BaseAdapter {
 
     private final Context context;
-    private List<Image> images;
+    private List<PictureEntity> images;
+//    private List<Image> images;
 
     public PhotoAdapter(Context context) {
         images = new ArrayList<>();
@@ -48,7 +50,7 @@ public class PhotoAdapter extends BaseAdapter {
     }
 
     @Override
-    public Image getItem(int position) {
+    public PictureEntity getItem(int position) {
         return images.get(position);
     }
 

@@ -5,12 +5,14 @@ import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
 
+import tsekhmeistruk.funnycats.models.PictureEntity;
+
 /**
  * Created by Roman Tsekhmeistruk on 17.01.2017.
  */
 
 @Root(name = "image")
-public class Image implements Serializable {
+public class Image implements Serializable, PictureEntity {
 
     @Element(name = "url")
     private String url;
@@ -27,14 +29,17 @@ public class Image implements Serializable {
     @Element(name = "created", required = false)
     private String created;
 
+    @Override
     public String getUrl() {
         return url;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getSourceUrl() {
         return sourceUrl;
     }
