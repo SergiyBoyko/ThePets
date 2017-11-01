@@ -35,7 +35,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
-import tsekhmeistruk.funnycats.AppFunnyCats;
+import tsekhmeistruk.funnycats.AppFunnyPets;
 import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
@@ -199,7 +199,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     }
 
     public AppComponent getAppComponent() {
-        return ((AppFunnyCats) getApplication()).appComponent();
+        return ((AppFunnyPets) getApplication()).appComponent();
     }
 
     private void clearPhotoList() {

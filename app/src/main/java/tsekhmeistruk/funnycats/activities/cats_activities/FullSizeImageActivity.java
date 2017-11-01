@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import tsekhmeistruk.funnycats.AppFunnyCats;
+import tsekhmeistruk.funnycats.AppFunnyPets;
 import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
@@ -145,7 +145,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
     }
 
     public AppComponent getAppComponent() {
-        return ((AppFunnyCats) getApplication()).appComponent();
+        return ((AppFunnyPets) getApplication()).appComponent();
     }
 
 }

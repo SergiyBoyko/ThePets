@@ -11,11 +11,11 @@ import tsekhmeistruk.funnycats.di.module.AppModule;
  * Created by Roman Tsekhmeistruk on 11.04.2017.
  */
 
-public class AppFunnyCats extends MultiDexApplication {
+public class AppFunnyPets extends MultiDexApplication {
 
     private AppComponent appComponent;
 
-    public AppFunnyCats() {
+    public AppFunnyPets() {
         super();
 
         appComponent = DaggerAppComponent.builder()

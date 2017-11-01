@@ -20,10 +20,17 @@ import com.facebook.login.widget.LoginButton;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tsekhmeistruk.funnycats.AppFunnyPets;
 import tsekhmeistruk.funnycats.R;
+import tsekhmeistruk.funnycats.di.component.AppComponent;
+import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
+import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.dogs.entities.ImageUrl;
+import tsekhmeistruk.funnycats.presenters.dogs_presenter.DogPhotoListPresenter;
 import tsekhmeistruk.funnycats.views.dog_views.DogPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
 
@@ -34,6 +41,8 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
     @BindView(R.id.photo_container)
     GridView photoContainer;
 
+    @Inject
+    DogPhotoListPresenter photoListPresenter;
 
     private LoginButton loginButton;
     private ListView categoryList;
@@ -58,6 +67,12 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
         ((NavigationView) findViewById(R.id.nav_view))
                 .addHeaderView(LayoutInflater.from(this)
                         .inflate(R.layout.header_navigation_drawer_dogs, null));
+
+        DaggerPresentersComponent.builder()
+                .appComponent(getAppComponent())
+                .presentersModule(new PresentersModule())
+                .build()
+                .inject(this);
 
         ButterKnife.bind(this);
 
@@ -98,6 +113,10 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
     @Override
     public Context getContext() {
         return getApplicationContext();
+    }
+
+    public AppComponent getAppComponent() {
+        return ((AppFunnyPets) getApplication()).appComponent();
     }
 
     private void hideFacebookButton() {

@@ -1,5 +1,6 @@
 package tsekhmeistruk.funnycats.di.module;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -25,6 +26,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
+    @Named("retrofitForCats")
     public Retrofit provideRetrofitForCats() {
         return new Retrofit.Builder()
                 .baseUrl(Constants.THE_CAT_API)
@@ -33,26 +35,27 @@ public class ApiModule {
                 .build();
     }
 
-//    @Provides
-//    @Singleton
-//    public Retrofit provideRetrofitForDogs() {
-//        return new Retrofit.Builder()
-//                .baseUrl(Constants.THE_DOG_API)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .build();
-//    }
+    @Provides
+    @Singleton
+    @Named("retrofitForDogs")
+    public Retrofit provideRetrofitForDogs() {
+        return new Retrofit.Builder()
+                .baseUrl(Constants.THE_DOG_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+    }
 
     @Provides
     @Singleton
-    ICatPhotosDataSource provideCatPhotosDataSource(Retrofit retrofit) {
+    ICatPhotosDataSource provideCatPhotosDataSource(@Named("retrofitForCats") Retrofit retrofit) {
         return new CatPhotosDataSource(retrofit.create(TheCatApiSet.class));
     }
 
-//    @Provides
-//    @Singleton
-//    IDogPhotosDataSource provideDogPhotosDataSource(Retrofit retrofit) {
-//        return new DogPhotosDataSource(retrofit.create(TheDogApiSet.class));
-//    }
+    @Provides
+    @Singleton
+    IDogPhotosDataSource provideDogPhotosDataSource(@Named("retrofitForDogs") Retrofit retrofit) {
+        return new DogPhotosDataSource(retrofit.create(TheDogApiSet.class));
+    }
 
 }

@@ -5,8 +5,10 @@ import dagger.Provides;
 import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.models.dogs.remote.IDogPhotosDataSource;
 import tsekhmeistruk.funnycats.presenters.cats_presenter.FullSizePhotoPresenter;
 import tsekhmeistruk.funnycats.presenters.cats_presenter.CatPhotoListPresenter;
+import tsekhmeistruk.funnycats.presenters.dogs_presenter.DogPhotoListPresenter;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.
@@ -19,6 +21,12 @@ public class PresentersModule {
     @Scope(Scopes.VIEW)
     public CatPhotoListPresenter provideCatPhotoListPresenter(ICatPhotosDataSource catPhotosDataSource) {
         return new CatPhotoListPresenter(catPhotosDataSource);
+    }
+
+    @Provides
+    @Scope(Scopes.VIEW)
+    public DogPhotoListPresenter provideDogPhotoListPresenter(IDogPhotosDataSource dogPhotosDataSource) {
+        return new DogPhotoListPresenter(dogPhotosDataSource);
     }
 
     @Provides
