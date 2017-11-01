@@ -34,7 +34,7 @@ public class PhotoAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public void addImages(List<Image> images) {
+    public void addImages(List<? extends PictureEntity> images) {
         if (images != null) {
             this.images.addAll(images);
         }

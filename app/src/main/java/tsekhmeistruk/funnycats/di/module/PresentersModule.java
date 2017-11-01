@@ -6,7 +6,7 @@ import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
 import tsekhmeistruk.funnycats.presenters.cats_presenter.FullSizePhotoPresenter;
-import tsekhmeistruk.funnycats.presenters.cats_presenter.PhotoListPresenter;
+import tsekhmeistruk.funnycats.presenters.cats_presenter.CatPhotoListPresenter;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.
@@ -17,8 +17,8 @@ public class PresentersModule {
 
     @Provides
     @Scope(Scopes.VIEW)
-    public PhotoListPresenter providePhotoListPresenter(ICatPhotosDataSource catPhotosDataSource) {
-        return new PhotoListPresenter(catPhotosDataSource);
+    public CatPhotoListPresenter provideCatPhotoListPresenter(ICatPhotosDataSource catPhotosDataSource) {
+        return new CatPhotoListPresenter(catPhotosDataSource);
     }
 
     @Provides

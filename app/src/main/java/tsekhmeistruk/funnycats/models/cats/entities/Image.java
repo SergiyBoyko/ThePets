@@ -12,7 +12,7 @@ import tsekhmeistruk.funnycats.models.PictureEntity;
  */
 
 @Root(name = "image")
-public class Image implements Serializable, PictureEntity {
+public class Image implements PictureEntity {
 
     @Element(name = "url")
     private String url;

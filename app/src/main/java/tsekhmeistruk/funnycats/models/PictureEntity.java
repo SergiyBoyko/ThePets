@@ -1,10 +1,12 @@
 package tsekhmeistruk.funnycats.models;
 
+import java.io.Serializable;
+
 /**
  * Created by fbrsw on 31.10.2017.
  */
 
-public interface PictureEntity {
+public interface PictureEntity extends Serializable {
 
     String getUrl();
 

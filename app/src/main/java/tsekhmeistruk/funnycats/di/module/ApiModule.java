@@ -6,11 +6,15 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.api.TheCatApiSet;
+import tsekhmeistruk.funnycats.api.TheDogApiSet;
 import tsekhmeistruk.funnycats.models.cats.remote.CatPhotosDataSource;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
+import tsekhmeistruk.funnycats.models.dogs.remote.DogPhotosDataSource;
+import tsekhmeistruk.funnycats.models.dogs.remote.IDogPhotosDataSource;
 
 /**
  * Created by Roman Tsekhmeistruk on 11.04.2017.
@@ -21,7 +25,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit() {
+    public Retrofit provideRetrofitForCats() {
         return new Retrofit.Builder()
                 .baseUrl(Constants.THE_CAT_API)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -29,10 +33,26 @@ public class ApiModule {
                 .build();
     }
 
+//    @Provides
+//    @Singleton
+//    public Retrofit provideRetrofitForDogs() {
+//        return new Retrofit.Builder()
+//                .baseUrl(Constants.THE_DOG_API)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .build();
+//    }
+
     @Provides
     @Singleton
     ICatPhotosDataSource provideCatPhotosDataSource(Retrofit retrofit) {
         return new CatPhotosDataSource(retrofit.create(TheCatApiSet.class));
     }
+
+//    @Provides
+//    @Singleton
+//    IDogPhotosDataSource provideDogPhotosDataSource(Retrofit retrofit) {
+//        return new DogPhotosDataSource(retrofit.create(TheDogApiSet.class));
+//    }
 
 }

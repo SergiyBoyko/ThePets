@@ -43,7 +43,7 @@ import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.cats.entities.CategoryList;
 import tsekhmeistruk.funnycats.models.cats.entities.ImageList;
-import tsekhmeistruk.funnycats.presenters.cats_presenter.PhotoListPresenter;
+import tsekhmeistruk.funnycats.presenters.cats_presenter.CatPhotoListPresenter;
 import tsekhmeistruk.funnycats.views.cats_views.CatPhotosView;
 import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
@@ -56,7 +56,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     GridView photoContainer;
 
     @Inject
-    PhotoListPresenter photoListPresenter;
+    CatPhotoListPresenter photoListPresenter;
 
     private LoginButton loginButton;
     private ListView categoryList;
