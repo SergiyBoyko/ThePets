@@ -9,5 +9,13 @@ import tsekhmeistruk.funnycats.models.dogs.entities.TheDogApiResponse;
 
 public interface IDogPhotosDataSource {
 
-    Observable<TheDogApiResponse> getTestImages();
+    Observable<TheDogApiResponse> getBulldogImages();
+
+    Observable<TheDogApiResponse> getBoxerImages();
+
+    Observable<TheDogApiResponse> getDobermanImages();
+
+    Observable<TheDogApiResponse> getLabradorImages();
+
+    Observable<TheDogApiResponse> getPoodleImages();
 }

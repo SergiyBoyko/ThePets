@@ -6,7 +6,7 @@ import tsekhmeistruk.funnycats.di.scopes.Scope;
 import tsekhmeistruk.funnycats.di.scopes.Scopes;
 import tsekhmeistruk.funnycats.models.cats.remote.ICatPhotosDataSource;
 import tsekhmeistruk.funnycats.models.dogs.remote.IDogPhotosDataSource;
-import tsekhmeistruk.funnycats.presenters.cats_presenter.FullSizePhotoPresenter;
+import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
 import tsekhmeistruk.funnycats.presenters.cats_presenter.CatPhotoListPresenter;
 import tsekhmeistruk.funnycats.presenters.dogs_presenter.DogPhotoListPresenter;
 

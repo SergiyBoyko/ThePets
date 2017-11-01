@@ -38,6 +38,7 @@ import butterknife.OnItemClick;
 import tsekhmeistruk.funnycats.AppFunnyPets;
 import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
+import tsekhmeistruk.funnycats.activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
@@ -182,7 +183,7 @@ public class CatsActivity extends AppCompatActivity implements CatPhotosView {
     @Override
     public void showCategoryList(CategoryList categoryNameList) {
         CategoryListAdapter categoryListAdapter
-                = new CategoryListAdapter(categoryNameList.getCategories());
+                = new CategoryListAdapter(categoryNameList.getCategories(), Constants.CAT_ICON);
         categoryList.setAdapter(categoryListAdapter);
     }
 

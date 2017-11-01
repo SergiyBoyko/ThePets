@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
 
 /**
@@ -17,9 +18,11 @@ import tsekhmeistruk.funnycats.R;
 public class CategoryListAdapter extends BaseAdapter {
 
     private List<String> categories;
+    private String icon;
 
-    public CategoryListAdapter(List<String> categories) {
+    public CategoryListAdapter(List<String> categories, String icon) {
         this.categories = categories;
+        this.icon = icon;
     }
 
     @Override
@@ -40,8 +43,12 @@ public class CategoryListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext())
+            if (icon.equals(Constants.CAT_ICON))
+                convertView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_photo_category, parent, false);
+            else if (icon.equals(Constants.DOG_ICON))
+                convertView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_dog_photo_category, parent, false);
         }
 
         TextView categoryName = (TextView) convertView.findViewById(R.id.category_name);

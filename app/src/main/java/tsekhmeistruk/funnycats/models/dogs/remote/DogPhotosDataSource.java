@@ -17,7 +17,27 @@ public class DogPhotosDataSource implements IDogPhotosDataSource {
     }
 
     @Override
-    public Observable<TheDogApiResponse> getTestImages() {
-        return theDogApiSet.getTestImages();
+    public Observable<TheDogApiResponse> getBulldogImages() {
+        return theDogApiSet.getBulldogImages();
+    }
+
+    @Override
+    public Observable<TheDogApiResponse> getBoxerImages() {
+        return theDogApiSet.getBoxerImages();
+    }
+
+    @Override
+    public Observable<TheDogApiResponse> getDobermanImages() {
+        return theDogApiSet.getDobermanImages();
+    }
+
+    @Override
+    public Observable<TheDogApiResponse> getLabradorImages() {
+        return theDogApiSet.getLabradorImages();
+    }
+
+    @Override
+    public Observable<TheDogApiResponse> getPoodleImages() {
+        return theDogApiSet.getPoodleImages();
     }
 }

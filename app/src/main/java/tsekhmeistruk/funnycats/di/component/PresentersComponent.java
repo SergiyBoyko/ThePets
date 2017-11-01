@@ -2,7 +2,7 @@ package tsekhmeistruk.funnycats.di.component;
 
 import dagger.Component;
 import tsekhmeistruk.funnycats.activities.cats_activities.CatsActivity;
-import tsekhmeistruk.funnycats.activities.cats_activities.FullSizeImageActivity;
+import tsekhmeistruk.funnycats.activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.activities.dog_activities.DogsActivity;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.di.scopes.Scope;

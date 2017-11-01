@@ -1,11 +1,8 @@
 package tsekhmeistruk.funnycats.presenters.dogs_presenter;
 
-import java.util.List;
-
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import tsekhmeistruk.funnycats.activities.cats_activities.CatsActivity;
+import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.activities.dog_activities.DogsActivity;
 import tsekhmeistruk.funnycats.models.dogs.entities.ImageUrl;
 import tsekhmeistruk.funnycats.models.dogs.entities.TheDogApiResponse;
@@ -26,9 +23,62 @@ public class DogPhotoListPresenter extends BasePresenter<DogsActivity> {
         this.dogPhotosDataSource = dogPhotosDataSource;
     }
 
-    public void loadPhotoList() {
+    public void loadCategoryList() {
         DogsActivity view = getView();
-        subscribe(dogPhotosDataSource.getTestImages()
+        view.showCategoryList(Constants.dogsCategories);
+    }
+
+    public void loadBulldogPhotoList() {
+        DogsActivity view = getView();
+        subscribe(dogPhotosDataSource.getBulldogImages()
+                .retryWhen(new RxRetryWithDelay())
+                .map(TheDogApiResponse::getMessage)
+                .map(ImageUrl::convertStringsToImageUrls)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
+    public void loadBoxerPhotoList() {
+        DogsActivity view = getView();
+        subscribe(dogPhotosDataSource.getBoxerImages()
+                .retryWhen(new RxRetryWithDelay())
+                .map(TheDogApiResponse::getMessage)
+                .map(ImageUrl::convertStringsToImageUrls)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
+    public void loadDobermanPhotoList() {
+        DogsActivity view = getView();
+        subscribe(dogPhotosDataSource.getDobermanImages()
+                .retryWhen(new RxRetryWithDelay())
+                .map(TheDogApiResponse::getMessage)
+                .map(ImageUrl::convertStringsToImageUrls)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
+    public void loadLabradorPhotoList() {
+        DogsActivity view = getView();
+        subscribe(dogPhotosDataSource.getLabradorImages()
+                .retryWhen(new RxRetryWithDelay())
+                .map(TheDogApiResponse::getMessage)
+                .map(ImageUrl::convertStringsToImageUrls)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::showPhotoList, new RxErrorAction(getView().getContext()))
+        );
+    }
+
+    public void loadPoodlePhotoList() {
+        DogsActivity view = getView();
+        subscribe(dogPhotosDataSource.getPoodleImages()
                 .retryWhen(new RxRetryWithDelay())
                 .map(TheDogApiResponse::getMessage)
                 .map(ImageUrl::convertStringsToImageUrls)

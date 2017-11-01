@@ -1,7 +1,12 @@
 package tsekhmeistruk.funnycats.activities.dog_activities;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
+import android.support.constraint.solver.widgets.ConstraintAnchor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +20,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
 
 import java.util.List;
@@ -24,14 +28,18 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import tsekhmeistruk.funnycats.AppFunnyPets;
+import tsekhmeistruk.funnycats.Constants;
 import tsekhmeistruk.funnycats.R;
+import tsekhmeistruk.funnycats.activities.FullSizeImageActivity;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
 import tsekhmeistruk.funnycats.models.dogs.entities.ImageUrl;
 import tsekhmeistruk.funnycats.presenters.dogs_presenter.DogPhotoListPresenter;
 import tsekhmeistruk.funnycats.views.dog_views.DogPhotosView;
+import tsekhmeistruk.funnycats.widgets.adapters.CategoryListAdapter;
 import tsekhmeistruk.funnycats.widgets.adapters.PhotoAdapter;
 
 public class DogsActivity extends AppCompatActivity implements DogPhotosView {
@@ -47,11 +55,11 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
     private LoginButton loginButton;
     private ListView categoryList;
 
-    private CallbackManager callbackManager;
-
     private PhotoAdapter photoAdapter;
 
     private NavigationView navigationView;
+
+    private NetworkChangeReceiver networkChangeReceiver = new NetworkChangeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +69,7 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.dogs_part_app_name);
+        toolbar.setTitle(getString(R.string.dogs_part_app_name));
         setSupportActionBar(toolbar);
 
         ((NavigationView) findViewById(R.id.nav_view))
@@ -92,10 +100,42 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
         hideFacebookButton();
 
         categoryList = (ListView) navigationView.findViewById(R.id.category_list);
+        categoryList.setOnItemClickListener((parent, view, position, id) -> {
+            clearPhotoList();
+            String categoryName = (String) view.getTag();
 
+
+            loadCategoryByString(categoryName);
+            showToast(categoryName);
+
+            drawer.closeDrawer(GravityCompat.START);
+        });
 
         photoListPresenter.setView(this);
-        photoListPresenter.loadPhotoList();
+        photoListPresenter.loadCategoryList();
+        photoListPresenter.loadBulldogPhotoList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(networkChangeReceiver);
+    }
+
+    @OnItemClick(R.id.photo_container)
+    public void startFullSizePhotoActivity(int position) {
+        Intent intent = new Intent(DogsActivity.this, FullSizeImageActivity.class);
+        intent.putExtra(Constants.IMAGE, photoAdapter.getItem(position));
+        intent.putExtra(Constants.USER_ID, Constants.NULL_USER);
+        intent.putExtra(Constants.IS_FAVORITE, false);
+        startActivity(intent);
     }
 
     @Override
@@ -115,6 +155,13 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
     }
 
     @Override
+    public void showCategoryList(List<String> categories) {
+        CategoryListAdapter categoryListAdapter
+                = new CategoryListAdapter(categories, Constants.DOG_ICON);
+        categoryList.setAdapter(categoryListAdapter);
+    }
+
+    @Override
     public Context getContext() {
         return getApplicationContext();
     }
@@ -123,12 +170,64 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
         return ((AppFunnyPets) getApplication()).appComponent();
     }
 
+    private void clearPhotoList() {
+        photoAdapter.clearImages();
+        photoAdapter.notifyDataSetChanged();
+    }
+
     private void hideFacebookButton() {
         loginButton.setVisibility(View.INVISIBLE);
     }
 
+    private void loadCategoryByString(String category) { // test temp implementation
+        int i = Constants.dogsCategories.indexOf(category);
+        switch (i) {
+            case 0:
+                photoListPresenter.loadBulldogPhotoList();
+                break;
+            case 1:
+                photoListPresenter.loadBoxerPhotoList();
+                break;
+            case 2:
+                photoListPresenter.loadDobermanPhotoList();
+                break;
+            case 3:
+                photoListPresenter.loadLabradorPhotoList();
+                break;
+            case 4:
+                photoListPresenter.loadPoodlePhotoList();
+        }
+    }
+
     private void showToast(String text) {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    private class NetworkChangeReceiver extends BroadcastReceiver {
+
+        public NetworkChangeReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!isInitialStickyBroadcast()) {
+                final ConnectivityManager connMgr = (ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                final android.net.NetworkInfo wifi = connMgr
+                        .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+                final android.net.NetworkInfo mobile = connMgr
+                        .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+                if (wifi.isConnected() || mobile.isConnected()) {
+                    photoListPresenter.loadBulldogPhotoList();
+                } else {
+                    showToast(getString(R.string.disconnected));
+                }
+            }
+        }
+
     }
 
 }

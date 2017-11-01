@@ -11,6 +11,18 @@ import tsekhmeistruk.funnycats.models.dogs.entities.TheDogApiResponse;
 public interface TheDogApiSet {
 
     @GET("breed/bulldog/images")
-    Observable<TheDogApiResponse> getTestImages();
+    Observable<TheDogApiResponse> getBulldogImages();
+
+    @GET("breed/boxer/images")
+    Observable<TheDogApiResponse> getBoxerImages();
+
+    @GET("breed/doberman/images")
+    Observable<TheDogApiResponse> getDobermanImages();
+
+    @GET("breed/labrador/images")
+    Observable<TheDogApiResponse> getLabradorImages();
+
+    @GET("breed/poodle/images")
+    Observable<TheDogApiResponse> getPoodleImages();
 
 }

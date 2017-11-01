@@ -1,4 +1,4 @@
-package tsekhmeistruk.funnycats.activities.cats_activities;
+package tsekhmeistruk.funnycats.activities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +25,8 @@ import tsekhmeistruk.funnycats.R;
 import tsekhmeistruk.funnycats.di.component.AppComponent;
 import tsekhmeistruk.funnycats.di.component.DaggerPresentersComponent;
 import tsekhmeistruk.funnycats.di.module.PresentersModule;
-import tsekhmeistruk.funnycats.models.cats.entities.Image;
-import tsekhmeistruk.funnycats.presenters.cats_presenter.FullSizePhotoPresenter;
+import tsekhmeistruk.funnycats.models.PictureEntity;
+import tsekhmeistruk.funnycats.presenters.FullSizePhotoPresenter;
 import tsekhmeistruk.funnycats.views.cats_views.FullSizePhotoView;
 
 public class FullSizeImageActivity extends AppCompatActivity implements FullSizePhotoView {
@@ -57,7 +57,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
                 .build()
                 .inject(this);
 
-        Image image = (Image) getIntent().getExtras().getSerializable(Constants.IMAGE);
+        PictureEntity image = (PictureEntity) getIntent().getExtras().getSerializable(Constants.IMAGE);
         if (image != null) {
             imageUrl = image.getUrl();
             imageId = image.getId();
@@ -76,17 +76,20 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     @Override
     public void onAddingToFavorites() {
+        if (!isRatingAvailable()) return; // custom temp implementation
         showToast(getString(R.string.added_favorite));
     }
 
     @Override
     public void onRemovingFromFavorites() {
+        if (!isRatingAvailable()) return; // custom temp implementation
         showToast(getString(R.string.removed_favorite));
         onBackPressed();
     }
 
     @OnClick(R.id.like)
     public void addFavorite() {
+        if (!isRatingAvailable()) return;
         if (userId != null) {
             if (!isFavorite) {
                 fullSizePhotoPresenter.favourite(imageId, userId, null);
@@ -100,6 +103,7 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
 
     @OnClick(R.id.dislike)
     public void removeFavorite() {
+        if (!isRatingAvailable()) return;
         if (userId != null) {
             if (isFavorite) {
                 fullSizePhotoPresenter.favourite(imageId, userId, Constants.ACTION_REMOVE);
@@ -109,6 +113,14 @@ public class FullSizeImageActivity extends AppCompatActivity implements FullSize
         } else {
             showToast(getString(R.string.log_in));
         }
+    }
+
+    private boolean isRatingAvailable() {  // custom implementation
+        if (userId.equals(Constants.NULL_USER)) {
+            showToast(getString(R.string.not_supported));
+            return false; // custom temp implementation
+        }
+        return true;
     }
 
     private void showToast(String text) {

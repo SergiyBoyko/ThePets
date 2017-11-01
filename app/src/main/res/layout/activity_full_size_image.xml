@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlack"
-    tools:context="tsekhmeistruk.funnycats.activities.cats_activities.FullSizeImageActivity">
+    tools:context="tsekhmeistruk.funnycats.activities.FullSizeImageActivity">
 
     <ProgressBar
         android:id="@+id/progress"
