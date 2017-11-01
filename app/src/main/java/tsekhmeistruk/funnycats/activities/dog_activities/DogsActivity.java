@@ -76,7 +76,7 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
 
         ButterKnife.bind(this);
 
-        // TODO: 31.10.2017 facebook dagger
+        // TODO: 31.10.2017 facebook
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,6 +92,10 @@ public class DogsActivity extends AppCompatActivity implements DogPhotosView {
         hideFacebookButton();
 
         categoryList = (ListView) navigationView.findViewById(R.id.category_list);
+
+
+        photoListPresenter.setView(this);
+        photoListPresenter.loadPhotoList();
     }
 
     @Override
