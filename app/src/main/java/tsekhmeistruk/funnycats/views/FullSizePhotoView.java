@@ -1,4 +1,4 @@
-package tsekhmeistruk.funnycats.views.cats_views;
+package tsekhmeistruk.funnycats.views;
 
 import tsekhmeistruk.funnycats.views.BaseView;
 
